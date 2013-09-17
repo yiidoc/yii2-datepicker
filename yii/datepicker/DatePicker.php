@@ -39,9 +39,8 @@ class DatePicker extends InputWidget
     public function registerScript()
     {
         if (!empty($this->clientOptions)) {
-            $id = $this->options['id'];
             $configure = empty($this->clientOptions) ? '' : Json::encode($this->clientOptions);
-            $js = "jQuery('#$id').datepicker($configure);";
+            $js = "jQuery('#{$this->options["id"]}').datepicker($configure);";
             $this->getView()->registerJs($js);
         }
     }
@@ -51,7 +50,7 @@ class DatePicker extends InputWidget
         if (!empty($this->clientEvents)) {
             $js = array();
             foreach ($this->clientEvents as $event => $handle) {
-                $js[] = "jQuery.on('$event',$handle);";
+                $js[] = "jQuery('#{$this->options["id"]}').on('$event',$handle);";
             }
             $this->getView()->registerJs(implode(PHP_EOL, $js));
         }
