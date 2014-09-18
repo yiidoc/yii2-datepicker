@@ -1,0 +1,25 @@
+{
+    "name": "yiidoc/yii2-redactor",
+    "description": "The DataPicker Twitter Bootstrap extension for the Yii2 framework.",
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/yiidoc/yii2-datepicker/issues?state=open",
+        "source": "https://github.com/yiidoc/yii2-datepicker"
+    },
+    "authors": [
+        {
+            "name": "Nghia Nguyen",
+            "email": "zinzinday@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "bower-asset/bootstrap-datepicker": ">=1.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "yii\\datepicker\\": "/"
+        }
+    }
+}

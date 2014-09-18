@@ -10,12 +10,17 @@
 
 namespace yii\datepicker;
 
+use Yii;
 use yii\widgets\InputWidget;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\helpers\ArrayHelper;
+use yii\web\AssetBundle;
 
-class DatePicker extends InputWidget
-{
+/**
+ * @property DatePickerAsset $assetBundle Description
+ */
+class DatePicker extends InputWidget {
 
     public $options = ['class' => 'form-control'];
     public $clientOptions;
@@ -31,13 +36,12 @@ class DatePicker extends InputWidget
     public $toAttribute = false;
     public $toName = false;
     public $toValue = false;
+    private $_assetBundle;
 
     public function init()
     {
-        DatePickerAsset::register($this->getView());
-        if ($this->clientOptions['language']) {
-            DatePickerLocaleAsset::register($this->getView());
-        }
+        $this->registerAssetBundle();
+        $this->registerLocate();
         $this->registerScript();
         $this->registerEvent();
     }
@@ -105,6 +109,22 @@ class DatePicker extends InputWidget
         echo Html::endTag('div');
     }
 
+    public function registerLocate()
+    {
+        $locate = ArrayHelper::getValue($this->clientOptions, 'language', false);
+        if ($locate) {
+            $locateAsset = 'locales/bootstrap-datepicker.' . $locate . '.js';
+            if (file_exists(Yii::getAlias($this->assetBundle->sourcePath . '/' . $locateAsset))) {
+                $this->assetBundle->js[] = $locateAsset;
+            }
+        }
+    }
+
+    public function registerAssetBundle()
+    {
+        $this->_assetBundle = DatePickerAsset::register($this->getView());
+    }
+
     public function registerScript()
     {
         $configure = empty($this->clientOptions) ? '' : Json::encode($this->clientOptions);
@@ -126,6 +146,14 @@ class DatePicker extends InputWidget
     public function getSelector()
     {
         return empty($this->type) ? $this->id : $this->type . '_' . $this->id;
+    }
+
+    public function getAssetBundle()
+    {
+        if (!($this->_assetBundle instanceof AssetBundle)) {
+            $this->registerAssetBundle();
+        }
+        return $this->_assetBundle;
     }
 
 }

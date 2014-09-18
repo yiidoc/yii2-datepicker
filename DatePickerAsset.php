@@ -9,15 +9,11 @@
  */
 
 namespace yii\datepicker;
-/**
- * Description of DateTimePicker
- * @property type $name Description
- */
-class DatePickerAsset extends \yii\web\AssetBundle
-{
 
-    public $sourcePath = '@vendor/yiidoc/yii2-datepicker/assets';
-    public $depends = array('yii\bootstrap\BootstrapAsset');
+class DatePickerAsset extends \yii\web\AssetBundle {
+
+    public $sourcePath = '@bower/bootstrap-datepicker';
+    public $depends = ['yii\bootstrap\BootstrapAsset'];
 
     public function init()
     {
