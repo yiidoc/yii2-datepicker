@@ -28,9 +28,9 @@ class DatePicker extends InputWidget {
 
     /**
      *
-     * @var string (null|input|component|embedded|range) 
+     * @var string (null|input|component|embedded|range)
      */
-    public $type = 'component';
+    public $type = 'input';
     /* Only using for type range */
     public $toModel = false;
     public $toAttribute = false;
@@ -113,9 +113,11 @@ class DatePicker extends InputWidget {
     {
         $locate = ArrayHelper::getValue($this->clientOptions, 'language', false);
         if ($locate) {
-            $locateAsset = 'locales/bootstrap-datepicker.' . $locate . '.js';
+            $locateAsset = 'js/locales/bootstrap-datepicker.' . $locate . '.js';
             if (file_exists(Yii::getAlias($this->assetBundle->sourcePath . '/' . $locateAsset))) {
                 $this->assetBundle->js[] = $locateAsset;
+            } else {
+                ArrayHelper::remove($this->clientOptions, 'language');
             }
         }
     }
