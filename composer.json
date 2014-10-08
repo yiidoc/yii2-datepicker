@@ -15,7 +15,7 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "bower-asset/bootstrap-datepicker": "1.*"
+        "bower-asset/bootstrap-datepicker": "*"
     },
     "autoload": {
         "psr-4": {
