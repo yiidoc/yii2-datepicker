@@ -14,7 +14,7 @@ class DatePickerAsset extends \yii\web\AssetBundle
 {
 
     public $sourcePath = '@bower/bootstrap-datepicker';
-    public $depends = ['yii\bootstrap\BootstrapAsset'];
+    public $depends = ['yii\bootstrap\BootstrapPluginAsset'];
     public $css = ['css/datepicker3.css'];
     public $js = ['js/bootstrap-datepicker.js'];
 }
